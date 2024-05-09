@@ -8,7 +8,7 @@ if (!uri) {
 
 const client = new MongoClient(uri);
 
-export async function main() {
+export async function connectDB() {
   console.log(uri);
   try {
     await client.connect();

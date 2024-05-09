@@ -44,4 +44,5 @@ const BlogPostSchema: Schema = new Schema({
 });
 
 // Create and export the BlogPost model based on the schema
-export default models.Blog || model<IBlogPost>("Blog", BlogPostSchema);
+const Blog = models.Blog || model<IBlogPost>("Blog", BlogPostSchema);
+export default Blog;
