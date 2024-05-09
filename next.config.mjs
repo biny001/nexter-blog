@@ -12,6 +12,11 @@ const nextConfig = {
         hostname: "assets.aceternity.com",
         pathname: "**",
       },
+      {
+        protocol: "http",
+        hostname: "www.w3.org",
+        pathname: "**",
+      },
     ],
   },
 };

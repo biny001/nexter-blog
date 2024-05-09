@@ -4,6 +4,7 @@ import { SpotlightPreview } from "@/components/SpotlightComponent";
 import { BackgroundBeamsDemo } from "@/components/BeamComponent";
 import React from "react";
 import { BackgroundGradientAnimationDemo } from "@/components/BackgrounGradient";
+import { HeroHighlightDemo } from "@/components/HeroHighlight";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <SpotlightPreview />
       <BackgroundBeamsDemo />
       <BackgroundGradientAnimationDemo />
+      <HeroHighlightDemo />
     </div>
   );
 };

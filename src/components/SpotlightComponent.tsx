@@ -1,47 +1,46 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import { cn } from "@/utils/cn";
-import { useInView } from "react-intersection-observer";
-import { motion, useAnimation } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
 import { Spotlight } from "./ui/Spotlight";
+import { Highlight } from "./ui/hero-highlight";
+
+import { HoverBorderGradientDemo } from "./HoverButton";
 
 export function SpotlightPreview() {
-  const { ref, inView } = useInView();
-  const [animation, setAnimation] = useState<string | null>("");
-  const spotlightRef = useRef(null);
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
+  const words = ["awesome", "amazing", "elegant", "nice"];
+  const animationDuration = 2; // Duration of the animation in seconds
+  const delayBetweenWords = 2000;
   useEffect(() => {
-    if (inView) {
-      // Trigger animation when component enters the viewport
-      setAnimation("spotlight");
-      console.log(inView);
-    } else {
-      // Reset animation when component leaves the viewport
-      setAnimation("");
-      console.log(inView);
-    }
-  }, [inView, animation]);
+    const intervalId = setInterval(() => {
+      setCurrentWordIndex((prevIndex) =>
+        prevIndex === words.length - 1 ? 0 : prevIndex + 1
+      );
+    }, delayBetweenWords);
 
+    return () => clearInterval(intervalId);
+  }, []);
   return (
-    <div
-      ref={ref}
-      className="h-[40rem] w-full rounded-md flex md:items-center md:justify-center bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden"
-    >
+    <div className="h-[40rem]  w-full rounded-md flex flex-col justify-center items-center md:items-center md:justify-center bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden">
       <Spotlight
-        className="-top-40 left-0 md:left-60 md:-top-20    "
-        animate={`${animation}`}
-        fill="  white "
+        className="-top-40 bgtra left-0 md:left-60 md:-top-20"
+        fill="white"
       />
       <div className=" p-4 max-w-7xl  mx-auto relative z-10  w-full pt-20 md:pt-0">
-        <h1 className="text-4xl md:text-7xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50">
-          Spotlight <br /> is the new trend.
+        <h1 className="text-4xl space-y-2 md:text-7xl lg:text-8xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50">
+          Speak <br /> Your
+          {/* <Highlight className="  text-black dark:text-slate-200     ">
+            Thoughts.
+          </Highlight> */}
+          <Highlight className="   bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50 ">
+            Thoughts.
+          </Highlight>
         </h1>
-        <p className="mt-4 font-normal text-base text-neutral-300 max-w-lg text-center mx-auto">
-          Spotlight effect is a great way to draw attention to a specific part
-          of the page. Here, we are drawing the attention towards the text
-          section of the page. I don&apos;t know why but I&apos;m running out of
-          copy.
-        </p>
+        <div>
+          <HoverBorderGradientDemo />
+        </div>
       </div>
     </div>
   );
